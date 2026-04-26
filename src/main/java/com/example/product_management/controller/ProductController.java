@@ -37,7 +37,7 @@ public class ProductController {
     public String deleteProduct(@PathVariable int id) {
         boolean isDeleted = productService.deleteProduct(id);
         if (isDeleted) {
-            return "Xóa thành công" + id;
+            return "Xóa thành công " + id;
         } else  {
             return "Không tìm thấy sản phẩm";
         }
