@@ -1,0 +1,53 @@
+1. Phân tích:
+    1.1 Client: Khi người dùng muốn xem danh sách sản phẩm, trình duyệt sẽ gửi 1 HTTP Request đến server
+        URL dự kiến: http://localhost:8080/api/products
+        HTTP method: GET - vì đây là hành động lấy dữ liệu (chỉ đọc), không làm thay đổi dữ liệu trên server
+    1.2 Server:
+        Khi nhận request, ứng dựng Spring Boot sẽ xử lý như sau:
+        1.2.1 Controller: Nhận request tử client, sau đó thực hiện mapping url /api/products
+        1.2.2 Service: Xử lý logic nghiệp vụ, gọi đến DAO/Repository để lấy dữ liệu
+        1.2.3 DAO/Repository: Thực hiện truy xuất dữ liệu (giả lập bộ nhớ RAM)
+    1.3 Database:
+        Database đóng vai trò lưu trữ và cung cấp dữ liệu về sản phẩm khi server yêu cầu
+        Giả lập bằng bộ nhớ RAM nề dùng List trong Java (RAM) để giả lập database
+    1.4 Response:
+        Spring Boot tự động chuyển Object Java → JSON
+        Sử dụng thư viện Jackson (mặc định)
+
+2. Luồng xử lý:
+Client (Browser)
+    ↓  GET /api/products
+Controller
+    ↓
+Service
+    ↓
+Repository (RAM)
+    ↓
+Trả về dữ liệu
+    ↓
+JSON Response
+    ↓
+Client hiển thị danh sách
+
+
+3. Sơ đồ minh họa:
+[ Browser ]
+      |
+      | GET /api/products
+      v
+[ Controller ]
+      |
+      v
+[ Service ]
+      |
+      v
+[ Repository (RAM) ]
+      |
+      v
+[ Data List ]
+      |
+      v
+[ JSON Response ]
+      |
+      v
+[ Browser hiển thị ]
